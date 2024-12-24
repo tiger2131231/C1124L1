@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Academic Ranking</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>
+            <label for="test_score">Test Score</label>
+        </td>
+        <td>
+            <input type="number" name="test_score" id="test_score" min="0" max="10" oninput="validateInput(this)">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="midterm_exam_score">Midterm Exam Score</label>
+        </td>
+        <td>
+            <input type="number" name="midterm_exam_score" id="midterm_exam_score" min="0" max="10" oninput="validateInput(this)">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="final_exam_score">Final Exam Score</label>
+        </td>
+        <td>
+            <input type="number" name="final_exam_score" id="final_exam_score" min="0"max="10" oninput="validateInput(this)">
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <button type="button" onclick="student_academic_ranking()">Submit</button>
+        </td>
+    </tr>
+</table>
+<strong style="color: blue" id="result"></strong>
+<script>
+    function validateInput(input) {
+        if (input.value < 0) {
+            alert("Scores cannot be negative. Please enter a valid number.");
+            input.value = "";
+        }
+    }
+
+    function student_academic_ranking() {
+        let test_score = parseFloat(document.getElementById('test_score').value);
+        let midterm_exam_score = parseFloat(document.getElementById('midterm_exam_score').value);
+        let final_exam_score = parseFloat(document.getElementById('final_exam_score').value);
+
+        if (isNaN(test_score) || isNaN(midterm_exam_score) || isNaN(final_exam_score)) {
+            document.getElementById("result").innerHTML = "Please enter valid scores.";
+            return;
+        }
+
+        let average_score = (test_score + midterm_exam_score + final_exam_score) / 3;
+
+        if (average_score < 4) {
+            document.getElementById("result").innerHTML = "You are ranked as Poor in academic performance.";
+        } else if (average_score < 5) {
+            document.getElementById("result").innerHTML = "You are ranked as Weak in academic performance.";
+        } else if (average_score < 7) {
+            document.getElementById("result").innerHTML = "You are ranked as Average in academic performance.";
+        } else if (average_score < 8) {
+            document.getElementById("result").innerHTML = "You are ranked as Fair in academic performance.";
+        } else if (average_score < 9) {
+            document.getElementById("result").innerHTML = "You are ranked as Good in academic performance.";
+        } else {
+            document.getElementById("result").innerHTML = "You are ranked as Excellent in academic performance.";
+        }
+    }
+</script>
+</body>
+</html>
